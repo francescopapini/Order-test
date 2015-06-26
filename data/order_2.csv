@@ -1,0 +1,5 @@
+Order Date,Customer ID,Supplier ID,Delivery Address,Total Order Value,Currency
+12/8/2014,75,8,"234 Avenue Parade, Accrington, Lancashire BB5 6QW, UK",134.13,USD
+8/24/2014,23,87,"9 Ampleforth Close, Orpington, Greater London BR6 9ES, UK",373.12,GBP
+1/7/2015,67,56,"45 Maple Drive, Chelmsford, Essex CM2 9HR, UK",903.12,GBP
+4/11/2015,12,16,"12 Aspley Lane, Milton Keynes, Central Bedfordshire MK17 9HY, UK",1294.14,GBP
