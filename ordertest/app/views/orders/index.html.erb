@@ -1,6 +1,53 @@
-<h2>import orders</h2>
+<h1>Orders</h1>
 
-<%= form_tag , multipart: true do %>
-  <%= file_field_tag :file %>
-  <% submit_tag "import" %>
-  <% end %>
+<table>
+ <thead>
+   <tr>
+     <th>ID</th>
+     <th>Order Name</th>
+     <th>Customer ID</th>
+     <th>Supplier ID</th>
+     <th>Delivery Address</th>
+     <th>Total Order Value</th>
+     <th>Currency</th>
+     <th>Original Order Value in GBP</th>
+     <th>Current Order Value in GBP</th>
+   </tr>
+ </thead>
+ <tbody>
+   <% @orders.each do |order| %>
+   <tr>
+     <td><%= order.id %></td>
+     <td><%= order.try(:order_date).try(:strftime, "%d-%m-%Y") %></td>
+     <td><%= order.customer_id %></td>
+     <td><%= order.supplier_id %></td>
+     <td><%= order.delivery_address %></td>
+     <td><%= order.total_order_value_pence %></td>
+     <td><%= order.currency %></td>
+     <td></td>
+     <td></td>
+   </tr>
+   <% end %>   
+ </tbody>
+</table>
+
+<h2>import orders</h2>
+<%= form_tag import_orders_path, multipart: true do %>
+<%= file_field_tag :file %>
+<%= submit_tag "import" %>
+<% end %>
+
+<script type="text/javascript">
+  $(document).ready(function (){
+    $.ajax({
+      url: 'http://openexchangerates.org/api/latest.json?app_id=2a0bb3e5ede04f869aea83e53eb718b6',
+      dataType: 'jsonp',
+      success: function(json) {
+          // Rates are in `json.rates`
+          // Base currency (USD) is `json.base`
+          // UNIX Timestamp when rates were collected is in `json.timestamp`
+
+        }
+      });
+  });
+</script>
