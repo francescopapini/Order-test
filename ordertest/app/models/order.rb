@@ -43,16 +43,4 @@ class Order < ActiveRecord::Base
   return new_value
 end
 
-def convert_order_to_gbp_historical_rate(total_order_value)
-  fx = OpenExchangeRates::Rates.new
-  if currency == "USD"
-    new_value = fx.convert(total_order_value, from: "USD", :to => "GBP", :on => order_date.to_s)
-  elsif currency == "EUR"
-    new_value = fx.convert(total_order_value, from: "EUR", :to => "GBP", :on => order_date.to_s)
-  else
-   return total_order_value
- end
- return new_value
-end
-
 end
