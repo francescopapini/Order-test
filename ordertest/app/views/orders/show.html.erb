@@ -23,8 +23,8 @@
          <td><%= @order.customer_id %></td>
          <td><%= @order.supplier_id %></td>
          <td><%= @order.currency %></td>
-         <td><%= @order.total_order_value_pence %></td>
-         <td><%= @order.convert_order_to_historical_rate(@order.total_order_value_pence, "GBP", @order.order_date)%></td>
+         <td><%= number_to_currency(@order.total_order_value_pence, unit: "") %></td>
+         <td><%= number_to_currency(@order.convert_order_to_historical_rate(@order.total_order_value_pence, "GBP", @order.order_date), unit: "£ ")%></td>
        </tr>
      </tbody>
    </table>
