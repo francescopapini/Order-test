@@ -3,9 +3,11 @@
     <h1>Import Orders</h1>
   </div>
 </div>
+
 <%= render "flash_messages" %>
+
 <div class= "row">
-<div class= "large-12 columns">
+  <div class= "large-12 columns">
     <%= form_tag import_orders_path, multipart: true do %>
     <%= file_field_tag :file %>
     <%= submit_tag "Import", class: "tiny button radius"  %>
@@ -13,6 +15,7 @@
   </div>
 </div>
 <br>
+
 <div class= "row">
   <div class= "large-12 columns">
     <%= link_to "Back", orders_path %>

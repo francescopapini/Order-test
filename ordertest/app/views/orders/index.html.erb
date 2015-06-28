@@ -9,25 +9,26 @@
 <div class= "row">
   <div class= "large-12 columns">
     <table>
-     <thead>
-       <tr>
-         <th>ID</th>
-         <th>Delivery Address</th>
-         <th></th>
-       </tr>
-     </thead>
-     <tbody>
-       <% @orders.each do |order| %>
-       <tr>
-         <td><%= order.id %></td>
-         <td><%= order.delivery_address %></td>
-         <th><%= link_to "View", order_path(order)%></th>
-       </tr>
-       <% end %>   
-     </tbody>
-   </table>
- </div>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Delivery Address</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%= order.id %></td>
+          <td><%= order.delivery_address %></td>
+          <th><%= link_to "View", order_path(order)%></th>
+        </tr>
+      <% end %>   
+      </tbody>
+    </table>
+  </div>
 </div>
+
 <div class= "row">
   <div class= "large-12 columns">
     <%= link_to "Import Orders", new_order_path %>
