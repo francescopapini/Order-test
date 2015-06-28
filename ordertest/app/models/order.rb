@@ -35,17 +35,17 @@ class Order < ActiveRecord::Base
   #   binding.pry
   # end
 
-
-  def convert_order_to_gbp_current_rate(total_order_value)
-   fx = OpenExchangeRates::Rates.new
-   if currency == "USD"
-     new_value = fx.convert(total_order_value, from: "USD", :to => "GBP")
-   elsif currency == "EUR"
-     new_value = fx.convert(total_order_value, from: "EUR", :to => "GBP")
-   else
-    return total_order_value
-  end
-  return new_value
+# converts an order from default currency (USD) into any rate for the specified date
+def convert_order_to_historical_rate(total_order_value, rate, conversion_date)
+ fx = OpenExchangeRates::Rates.new
+ if currency == "USD"
+  new_value = fx.convert(total_order_value, from: "USD", to: rate, on: conversion_date.to_s)
+ elsif currency == "EUR"
+   new_value = fx.convert(total_order_value, from: "EUR", to: rate, on: conversion_date.to_s)
+ else
+  return total_order_value
+end
+return new_value
 end
 
 end

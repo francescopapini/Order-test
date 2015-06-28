@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
                    order: { id: @order.id, customer: { id: @order.customer_id }},
                    supplier: { id: @order.supplier_id },
                    date: @order.order_date.strftime("%d-%m-%Y"),
-                   total_order_value: {local_currency_code: @order.currency, local_value: @order.total_order_value_pence.to_s, value: @order.convert_order_to_gbp_current_rate(@order.total_order_value_pence).to_s}
+                   total_order_value: {local_currency_code: @order.currency, local_value: @order.total_order_value_pence.to_s, value: @order.convert_order_to_historical_rate(@order.total_order_value_pence, "GBP", @order.order_date).to_s}
                  } 
     respond_to do |format|
       format.html 
