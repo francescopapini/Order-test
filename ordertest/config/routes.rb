@@ -5,5 +5,4 @@ Rails.application.routes.draw do
 
   root to: 'orders#index'
 
-  get 'orders/:id', 'orders#show', as: :order
 end

@@ -4,14 +4,7 @@
  <thead>
    <tr>
      <th>ID</th>
-     <th>Order Date</th>
-     <th>Customer ID</th>
-     <th>Supplier ID</th>
      <th>Delivery Address</th>
-     <th>Total Order Value</th>
-     <th>Currency</th>
-     <th>Original Order Value in GBP</th>
-     <!-- <th>Current Order Value in GBP</th> -->
      <th></th>
    </tr>
  </thead>
@@ -19,15 +12,8 @@
    <% @orders.each do |order| %>
    <tr>
      <td><%= order.id %></td>
-     <td><%= order.try(:order_date).try(:strftime, "%d-%m-%Y") %></td>
-     <td><%= order.customer_id %></td>
-     <td><%= order.supplier_id %></td>
      <td><%= order.delivery_address %></td>
-     <td><%= order.total_order_value_pence %></td>
-     <td><%= order.currency %></td>
-     <td><%= order.convert_order_to_gbp_current_rate(order.total_order_value_pence)%></td>
-     <td><%#= order.convert_order_to_gbp_historical_rate(order.total_order_value_pence)%></td>
-     <th><%= link_to "View Order", order_path(@order)%></th>
+     <th><%= link_to "View", order_path(order)%></th>
    </tr>
    <% end %>   
  </tbody>
