@@ -3,6 +3,9 @@
     <h1>Orders</h1>
   </div>
 </div>
+
+<%= render 'flash_messages' if !flash.empty?%>
+
 <div class= "row">
   <div class= "large-12 columns">
     <table>
@@ -25,9 +28,10 @@
    </table>
  </div>
 </div>
+<div class= "row">
+  <div class= "large-12 columns">
+    <%= link_to "Import Orders", new_order_path %>
+  </div>
+</div>
 
-<h2>import orders</h2>
-<%= form_tag import_orders_path, multipart: true do %>
-<%= file_field_tag :file %>
-<%= submit_tag "import" %>
-<% end %>
+

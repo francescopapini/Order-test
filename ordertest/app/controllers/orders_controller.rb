@@ -19,10 +19,13 @@ class OrdersController < ApplicationController
     end
   end
 
+  def new
+  end
+
 
   def import
     Order.import(params[:file])
-    redirect_to root_url, notice: "Orders imported"
+    redirect_to root_url, notice: "Orders Imported!"
   end
 
 end

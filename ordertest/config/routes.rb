@@ -4,5 +4,4 @@ Rails.application.routes.draw do
   end
 
   root to: 'orders#index'
-
 end
