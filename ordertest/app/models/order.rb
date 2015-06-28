@@ -1,5 +1,10 @@
 class Order < ActiveRecord::Base
 
+  validates :order_date, :customer_id, :supplier_id, :delivery_address, :currency, :total_order_value_pence, presence: true
+  validates :customer_id, numericality: true
+  validates :supplier_id, numericality: true 
+  validates :total_order_value_pence, numericality: {greater_than_or_equal_to: 0}
+
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
       row.to_hash
@@ -7,7 +12,7 @@ class Order < ActiveRecord::Base
        customer_id: row["Customer ID"],
        supplier_id: row["Supplier ID"],
        delivery_address: row["Delivery Address"],
-       total_order_value_pence: row["Total Order Value"] * 1000,
+       total_order_value_pence: row["Total Order Value"] * 100,
        currency: row["Currency"])
     end
   end

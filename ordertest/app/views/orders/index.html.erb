@@ -1,23 +1,30 @@
-<h1>Orders</h1>
-
-<table>
- <thead>
-   <tr>
-     <th>ID</th>
-     <th>Delivery Address</th>
-     <th></th>
-   </tr>
- </thead>
- <tbody>
-   <% @orders.each do |order| %>
-   <tr>
-     <td><%= order.id %></td>
-     <td><%= order.delivery_address %></td>
-     <th><%= link_to "View", order_path(order)%></th>
-   </tr>
-   <% end %>   
- </tbody>
-</table>
+<div class= "row">
+  <div class= "large-12 columns">
+    <h1>Orders</h1>
+  </div>
+</div>
+<div class= "row">
+  <div class= "large-12 columns">
+    <table>
+     <thead>
+       <tr>
+         <th>ID</th>
+         <th>Delivery Address</th>
+         <th></th>
+       </tr>
+     </thead>
+     <tbody>
+       <% @orders.each do |order| %>
+       <tr>
+         <td><%= order.id %></td>
+         <td><%= order.delivery_address %></td>
+         <th><%= link_to "View", order_path(order)%></th>
+       </tr>
+       <% end %>   
+     </tbody>
+   </table>
+ </div>
+</div>
 
 <h2>import orders</h2>
 <%= form_tag import_orders_path, multipart: true do %>

@@ -15,7 +15,6 @@ class OrdersController < ApplicationController
     respond_to do |format|
       format.html 
       format.json { render json: JSON.pretty_generate(json_order) }
-
     end
   end
 
