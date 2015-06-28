@@ -1,18 +1,18 @@
 class Order < ActiveRecord::Base
 
   validates :order_date, :customer_id, :supplier_id, :delivery_address, :currency, :total_order_value_pence, presence: true
-  validates :customer_id, numericality: true
-  validates :supplier_id, numericality: true 
+  validates :customer_id, numericality: {greater_than_or_equal_to: 0}
+  validates :supplier_id, numericality: {greater_than_or_equal_to: 0}
   validates :total_order_value_pence, numericality: {greater_than_or_equal_to: 0}
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
       row.to_hash
-      Order.create(order_date: row["Order Date"],
+      @order = Order.create(order_date: row["Order Date"],
        customer_id: row["Customer ID"],
        supplier_id: row["Supplier ID"],
        delivery_address: row["Delivery Address"],
-       total_order_value_pence: row["Total Order Value"] * 100,
+       total_order_value_pence: (row["Total Order Value"].to_f * 100).to_i,
        currency: row["Currency"])
     end
   end
@@ -38,14 +38,28 @@ class Order < ActiveRecord::Base
 # converts an order from default currency (USD) into any rate for the specified date
 def convert_order_to_historical_rate(total_order_value, rate, conversion_date)
  fx = OpenExchangeRates::Rates.new
- if currency == "USD"
-  new_value = fx.convert(total_order_value, from: "USD", to: rate, on: conversion_date.to_s)
- elsif currency == "EUR"
+ if conversion_date > DateTime.now
+  if currency == "USD"
+    new_value = fx.convert(total_order_value, from: "USD", to: rate)
+  elsif currency == "EUR"
+   new_value = fx.convert(total_order_value, from: "EUR", to: rate)
+ else
+   return total_order_value
+ end
+else
+  if currency == "USD"
+    new_value = fx.convert(total_order_value, from: "USD", to: rate, on: conversion_date.to_s)
+  elsif currency == "EUR"
    new_value = fx.convert(total_order_value, from: "EUR", to: rate, on: conversion_date.to_s)
  else
-  return total_order_value
+   return total_order_value
+ end
 end
 return new_value
+end
+
+def total_order_value
+  total_order_value_pence / 100
 end
 
 end
