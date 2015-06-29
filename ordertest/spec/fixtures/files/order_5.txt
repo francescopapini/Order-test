@@ -1,0 +1,3 @@
+Order Date;Customer ID;Supplier ID;Delivery Address;Total Order Value;Currency
+3/24/2014;98;97;"7325 Shady Trace, Corning, Pennsylvania, 15140-1446, US";0,34;USD
+1/4/2015;15;54;"6365 Wishing Field, Lionilli, Pennsylvania, 16963-4917, US";1.893,23;EUR
