@@ -26,7 +26,7 @@ class OrdersController < ApplicationController
   def import
     if params[:file]
       Order.import(params[:file])
-      redirect_to root_url, notice: "Orders Imported!"
+      redirect_to root_url
     else
       redirect_to new_order_path, notice: "No File To Import, Please Add File"
     end
