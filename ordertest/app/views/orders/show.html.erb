@@ -19,7 +19,7 @@
       </thead>
       <tbody>
         <tr>
-          <td><%= @order.try(:order_date).try(:strftime, "%d-%m-%Y") %></td>
+          <td><%= @order.order_date.strftime("%d-%m-%Y") %></td>
           <td><%= @order.customer_id %></td>
           <td><%= @order.supplier_id %></td>
           <td><%= @order.currency %></td>

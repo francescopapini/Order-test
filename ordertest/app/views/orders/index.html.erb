@@ -21,6 +21,7 @@
         <tr>
           <td><%= order.id %></td>
           <td><%= order.delivery_address %></td>
+          <td><%= order.order_date.strftime("%d-%m-%Y") %></td>
           <th><%= link_to "View", order_path(order)%></th>
         </tr>
       <% end %>   
