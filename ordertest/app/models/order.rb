@@ -3,11 +3,13 @@ class Order < ActiveRecord::Base
   validates :order_date, :customer_id, :supplier_id, :delivery_address, :currency, :total_order_value_pence, presence: true
   validates :customer_id, :supplier_id, :total_order_value_pence, numericality: {greater_than_or_equal_to: 0}
   
-  def self.import(file)  
+  def self.import_file(file)  
     if file.content_type.include? "csv" 
       self.import_csv(file)
+      return file
     elsif file.content_type.include? "plain"
       self.import_txt(file)
+      return file
     else
     end
   end

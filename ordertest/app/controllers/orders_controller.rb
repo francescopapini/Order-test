@@ -25,8 +25,14 @@ class OrdersController < ApplicationController
 
   def import
     if params[:file]
-      Order.import(params[:file])
-      redirect_to root_url
+      orders_number = Order.all.size
+      Order.import_file(params[:file])
+      new_orders_number = Order.all.size
+      if orders_number == new_orders_number
+        redirect_to new_order_path, notice: "No New Orders To Upload, Please Try Another File"
+      else
+        redirect_to root_url, notice: "Orders Uploaded!"
+      end
     else
       redirect_to new_order_path, notice: "No File To Import, Please Add File"
     end
